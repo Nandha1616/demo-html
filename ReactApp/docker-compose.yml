@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  colopration-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app            # Mount the current directory to /app in the container
+      - /app/node_modules  # Prevents node_modules from being mounted from the host
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Enables Vite's polling to detect changes
+    command: npm run dev -- --host
